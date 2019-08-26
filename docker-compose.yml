@@ -9,7 +9,6 @@ services:
       - .:/var/www/shopware:Z
     links:
       - app_mysql:mysql
-      - app_es:es
     environment:
       TERM: xterm
       COMPOSER_CACHE_DIR: /var/www/composer-cache-dir
@@ -29,18 +28,3 @@ services:
     ports:
         - "3306:3306"
 
-  app_es:
-    build: dev-ops/docker/containers/elastic-search
-    volumes:
-      - ./dev-ops/docker/containers/elastic-search/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:Z
-      - ./dev-ops/docker/_volumes/app-es-data:/usr/share/elasticsearch/data:Z
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    environment:
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
