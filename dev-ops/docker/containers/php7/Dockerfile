@@ -13,7 +13,7 @@ RUN mkdir -p /usr/share/man/man1
 
 RUN docker-php-ext-enable xdebug
 
-RUN apt-get update && apt-get install -y ant mysql-client
+RUN apt-get update && apt-get install -y ant default-mysql-client
 
 RUN chmod +x /usr/local/bin/wait-for-it.sh \
 && ln -s /app/psh.phar /bin/psh
