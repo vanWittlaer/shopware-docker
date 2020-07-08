@@ -18,9 +18,9 @@ services:
       - "80:80"
 
   app_mysql:
-    build: dev-ops/docker/containers/mysql
+    build: dev-ops/docker/containers/mariadb
     volumes:
-      - ./dev-ops/docker/_volumes/app-mysql-data:/var/lib/mysql:Z
+      - ./dev-ops/docker/_volumes/mariadb:/mysql-data
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: app
