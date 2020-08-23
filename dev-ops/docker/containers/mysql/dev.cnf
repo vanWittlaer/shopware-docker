@@ -13,3 +13,4 @@ join_buffer_size=256K
 table_open_cache=128
 
 max_connections=10000
+max_allowed_packet=10M
