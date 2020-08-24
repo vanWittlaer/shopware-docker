@@ -13,7 +13,8 @@ RUN mkdir -p /usr/share/man/man1 \
     && curl -sL https://deb.nodesource.com/setup_12.x | bash
 RUN mkdir -p /.npm \
     && apt-get install -y nodejs \
-    && npm install -g grunt-cli
+    && npm install -g grunt-cli \
+    && npm install -g grunt
 
 RUN docker-php-ext-enable xdebug
 
