@@ -1,4 +1,4 @@
-FROM webdevops/php-apache-dev:7.2
+FROM webdevops/php-apache-dev:7.4
 
 ENV COMPOSER_HOME=/.composer
 ENV WEB_DOCUMENT_ROOT=/var/www/shopware/shopware
