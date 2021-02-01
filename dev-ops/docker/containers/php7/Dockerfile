@@ -1,4 +1,4 @@
-FROM webdevops/php-apache-dev:7.4
+FROM webdevops/php-apache-dev:7.0
 
 ENV COMPOSER_HOME=/.composer
 ENV WEB_DOCUMENT_ROOT=/var/www/shopware/shopware
@@ -18,6 +18,16 @@ RUN mkdir -p /.npm \
 RUN docker-php-ext-enable xdebug
 
 RUN apt-get update && apt-get install -y ant default-mysql-client
+
+RUN mkdir /tmp/ioncube && \
+    mkdir -p /usr/local/ioncube && \
+    cd /tmp/ioncube && \
+    curl -SL http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz -o /tmp/ioncube/ioncube_loaders_lin_x86-64.tar.gz && \
+    tar xvf /tmp/ioncube/ioncube_loaders_lin_x86-64.tar.gz && \
+    cd `php -i | grep extension_dir | cut -d' ' -f 5` && \
+    cp /tmp/ioncube/ioncube/ioncube_loader_lin_7.0.so /usr/local/ioncube/ioncube_loader_lin_7.0.so && \
+    echo zend_extension=/usr/local/ioncube/ioncube_loader_lin_7.0.so > /usr/local/etc/php/conf.d/00-ioncube.ini && \
+    rm -rf /tmp/ioncube/
 
 RUN chmod +x /usr/local/bin/wait-for-it.sh \
 && ln -s /app/psh.phar /bin/psh
